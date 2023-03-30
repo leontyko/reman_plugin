@@ -194,12 +194,12 @@ def power_manager(core:VACore, phrase:str):
 			if r:
 				json_str = r.json()
 				data_dict = json.loads(json_str)
-				if data_dict['result'] == "ok" and delay > 0:
-					core.play_voice_assistant_speech(data_dict['detail'] + " на клиенте " + client_name)
-				elif data_dict['result'] == "ok" and delay == 0:
+				if data_dict[0].get('result') == 'ok': and delay > 0:
+					core.play_voice_assistant_speech(data_dict[0].get('detail') + " на клиенте " + client_name)
+				elif data_dict[0].get('result') == 'ok' and delay == 0:
 					core.play_voice_assistant_speech(states['task_complete'] + " " + client_name)
 				else:
-					core.play_voice_assistant_speech(states['error'] + ". " + data_dict['detail'])
+					core.play_voice_assistant_speech(states['error'] + ". " + data_dict[0].get('detail'))
 			else:
 				core.play_voice_assistant_speech(states['device_not_response'])
 		except Exception as e:
@@ -248,10 +248,10 @@ def app_start_manager(core:VACore, phrase:str):
 			if r:
 				json_str = r.json()
 				data_dict = json.loads(json_str)
-				if data_dict['result'] == "ok":
-					core.play_voice_assistant_speech(data_dict['detail'] + " на клиенте " + client_name)
+				if data_dict[0].get('result') == 'ok':
+					core.play_voice_assistant_speech(data_dict[0].get('detail') + " на клиенте " + client_name)
 				else:
-					core.play_voice_assistant_speech(states['error'] + ". " + data_dict['detail'])
+					core.play_voice_assistant_speech(states['error'] + ". " + data_dict[0].get('detail'))
 			else:
 				core.play_voice_assistant_speech(states['device_not_response'])
 		except Exception as e:
@@ -298,10 +298,10 @@ def link_open_manager(core:VACore, phrase:str):
 			if r:
 				json_str = r.json()
 				data_dict = json.loads(json_str)
-				if data_dict['result'] == "ok":
-					core.play_voice_assistant_speech(data_dict['detail'] + " на клиенте " + client_name)
+				if data_dict[0].get('result') == 'ok':
+					core.play_voice_assistant_speech(data_dict[0].get('detail') + " на клиенте " + client_name)
 				else:
-					core.play_voice_assistant_speech(states['error'] + ". " + data_dict['detail'])
+					core.play_voice_assistant_speech(states['error'] + ". " + data_dict[0].get('detail'))
 			else:
 				core.play_voice_assistant_speech(states['device_not_response'])
 		except Exception as e:
@@ -347,10 +347,10 @@ def cancel(core:VACore, phrase:str):
 			if r:
 				json_str = r.json()
 				data_dict = json.loads(json_str)
-				if data_dict['result'] == "ok":
-					core.play_voice_assistant_speech(data_dict['detail'] + " на клиенте " + client_name)
+				if data_dict[0].get('result') == 'ok':
+					core.play_voice_assistant_speech(data_dict[0].get('detail') + " на клиенте " + client_name)
 				else:
-					core.play_voice_assistant_speech(states['error'] + ". " + data_dict['detail'])
+					core.play_voice_assistant_speech(states['error'] + ". " + data_dict[0].get('detail'))
 			else:
 				core.play_voice_assistant_speech(states['device_not_response'])
 		except Exception as e:
@@ -392,8 +392,8 @@ def volume_manager(core:VACore, phrase:str):
 			if r:
 				json_str = r.json()
 				data_dict = json.loads(json_str)
-				if data_dict['result'] != "ok":
-					core.play_voice_assistant_speech(states['error'] + ". " + data_dict["detail"])
+				if data_dict[0].get('result') != 'ok':
+					core.play_voice_assistant_speech(states['error'] + ". " + data_dict[0].get('detail'))
 			else:
 				core.play_voice_assistant_speech(states['device_not_response'])
 		except Exception as e:
@@ -441,8 +441,8 @@ def media_manager(core:VACore, cmd:str, client_names:str):
 		if r:
 			json_str = r.json()
 			data_dict = json.loads(json_str)
-			if data_dict['result'] != "ok":
-				core.play_voice_assistant_speech(states['error'] + ". " + data_dict["detail"])
+			if data_dict[0].get('result') != 'ok':
+				core.play_voice_assistant_speech(states['error'] + ". " + data_dict[0].get('detail'))
 		else:
 			core.play_voice_assistant_speech(states['device_not_response'])
 	except Exception as e:
